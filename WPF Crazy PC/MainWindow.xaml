@@ -5,12 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF_Crazy_PC"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="850">
     <Grid>
-        <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="167" Text="Score:"/>
-        <TextBlock HorizontalAlignment="Left" Margin="10,393,0,0" TextWrapping="Wrap" Text="High Score:" VerticalAlignment="Top" Width="772"/>
-        <TextBlock HorizontalAlignment="Left" Margin="701,10,0,0" TextWrapping="Wrap" Text="Timer:" VerticalAlignment="Top" Width="65"/>
-        <Button Content="Start" HorizontalAlignment="Left" Margin="357,201,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click" RenderTransformOrigin="0.5,0.5"/>
+        <TextBlock x:Name="xScore" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="167" Text="Score:"/>
+        <TextBlock x:Name="xHighScore" HorizontalAlignment="Left" Margin="10,393,0,0" TextWrapping="Wrap" Text="High Score:" VerticalAlignment="Top" Width="772"/>
+        <TextBlock x:Name="xTimer" HorizontalAlignment="Left" Margin="701,10,0,0" TextWrapping="Wrap" Text="Timer:" VerticalAlignment="Top" Width="65"/>
+        <Button  x:Name="xButton" Content="Start" HorizontalAlignment="Left" Margin="400,200,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click" RenderTransformOrigin="0.5,0.5"/>
 
     </Grid>
 </Window>
