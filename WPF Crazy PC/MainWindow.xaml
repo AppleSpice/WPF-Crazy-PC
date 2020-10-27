@@ -10,7 +10,32 @@
         <TextBlock x:Name="xScore" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="167" Text="Score:"/>
         <TextBlock x:Name="xHighScore" HorizontalAlignment="Left" Margin="10,393,0,0" TextWrapping="Wrap" Text="High Score:" VerticalAlignment="Top" Width="772"/>
         <TextBlock x:Name="xTimer" HorizontalAlignment="Left" Margin="701,10,0,0" TextWrapping="Wrap" Text="Timer:" VerticalAlignment="Top" Width="65"/>
-        <Button  x:Name="xButton" Content="Start" HorizontalAlignment="Left" Margin="400,200,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click" RenderTransformOrigin="0.5,0.5"/>
+        <Button  x:Name="xButton" Content="Start" HorizontalAlignment="Left" Margin="400,200,0,0" VerticalAlignment="Top" Height="120" Width="120" Click="Button_Click" RenderTransformOrigin="0.5,0.5">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="Blue"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"></ContentPresenter>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="Green"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+        <TextBox x:Name="xNameBox" HorizontalAlignment="Left" Height="23" Margin="712,386,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBlock HorizontalAlignment="Left" Margin="751,365,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="Name"/>
+
+
 
     </Grid>
 </Window>
