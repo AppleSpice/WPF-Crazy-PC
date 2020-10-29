@@ -34,10 +34,15 @@ namespace WPF_Crazy_PC
         int yMouseLocation;
         int moveX = 0;
         int moveY = 0;
+        long max = 0;
+        long curresntScore = 0;
         //random
         public Random r = new Random();
         //string
         string path = "C:\\Users\\Public\\Documents\\CrazyGame.txt";
+        string pathName = "C:\\Users\\Public\\Documents\\CrazyGameName.txt";
+        string lastscore;
+        string lastName;
 
 
 
@@ -48,6 +53,16 @@ namespace WPF_Crazy_PC
             Thread crazyMouseThread = new Thread(new ThreadStart(CrazyMouseThread));
             crazyMouseThread.Start();
 
+            if (File.Exists(pathName))
+            {
+                if (File.Exists(path))
+                {
+                    lastscore = File.ReadAllLines(path).Last();
+
+                    lastName = File.ReadAllLines(pathName).Last();
+                    xHighScore.Text = $"High Score: {lastName}: {lastscore}";
+                }
+            }
             
         }
 
@@ -56,6 +71,7 @@ namespace WPF_Crazy_PC
             if (xButton.Height == 20)
             {
                 MessageBox.Show("Congrats You Win!");
+                System.Environment.Exit(0);
             }
             else
             {
@@ -102,10 +118,22 @@ namespace WPF_Crazy_PC
 
                 MessageBox.Show("The Game Is Over");
 
-                if (newscore > highscore)
+
+                String[] lines = File.ReadAllLines(path);
+
+                foreach (String line in lines)
                 {
-                    DataTime();
-                }
+                    if (Int64.TryParse(line, out max))
+                    {
+                        if (score > max)
+                        {
+                            DataTime();
+                       }
+                           
+                   }
+               }
+
+                //DataTime();
                 
             }
         }
@@ -158,7 +186,7 @@ namespace WPF_Crazy_PC
         public void DataTime()
         {
             //name check
-            NameCheck();
+           // NameCheck();
 
             if (!File.Exists(path))
             {
@@ -167,10 +195,11 @@ namespace WPF_Crazy_PC
                 {
                     //puts text in it
                     Byte[] info =
-                   new UTF8Encoding(true).GetBytes("");
+                   new UTF8Encoding(true).GetBytes($"{score}");
 
                     fs.Write(info, 0, info.Length);
                     fs.Close();
+                    
                 }
             }
             else
@@ -178,20 +207,51 @@ namespace WPF_Crazy_PC
                 //writes in file for test
                 using (StreamWriter sw = new StreamWriter(path))
                 {
-                    sw.WriteLine("");
+                    sw.Write($"{score}");
                     sw.Close();
+                    
                 }
             }
+
+            if (!File.Exists(pathName))
+            {
+                // Create the file if not already made.
+                using (FileStream fs = File.Create(pathName))
+                {
+                    //puts text in it
+                    Byte[] info =
+                   new UTF8Encoding(true).GetBytes($"{xNameBox.Text}");
+
+                    fs.Write(info, 0, info.Length);
+                    fs.Close();
+                    
+                }
+            }
+            else
+            {
+                //writes in file for test
+                using (StreamWriter sw = new StreamWriter(pathName))
+                {
+                    sw.Write($"{xNameBox.Text}");
+                    sw.Close();
+                    
+                }
+            }
+
+            lastscore = File.ReadAllLines(path).Last();
+
+            lastName = File.ReadAllLines(pathName).Last();
+            xHighScore.Text = $"High Score: {lastName}: {lastscore}";
         }
 
-        public void NameCheck()
-        {
-            while (xNameBox.Text == "")
-            {
-                MessageBox.Show("Please Enter A Name ");
-                Thread.Sleep(2000);
-            }
-        }
+       //public void NameCheck()
+       //{
+       //    while (xNameBox.Text == "")
+       //    {
+       //        MessageBox.Show("Please Enter A Name ");
+       //        Thread.Sleep(5000);
+       //    }
+       //}
         
     }
 }      
