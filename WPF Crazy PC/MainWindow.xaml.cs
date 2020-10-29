@@ -72,6 +72,7 @@ namespace WPF_Crazy_PC
             {
                 MessageBox.Show("Congrats You Win!");
                 System.Environment.Exit(0);
+                
             }
             else
             {
@@ -118,20 +119,35 @@ namespace WPF_Crazy_PC
 
                 MessageBox.Show("The Game Is Over");
 
-
-                String[] lines = File.ReadAllLines(path);
-
-                foreach (String line in lines)
-                {
-                    if (Int64.TryParse(line, out max))
+                if(File.Exists(pathName))
+            {
+                    if (File.Exists(path))
                     {
-                        if (score > max)
+                        String[] lines = File.ReadAllLines(path);
+
+                        foreach (String line in lines)
                         {
-                            DataTime();
-                       }
-                           
-                   }
-               }
+                            if (Int64.TryParse(line, out max))
+                            {
+                                if (score > max)
+                                {
+                                    DataTime();
+                                }
+
+                            }
+                        }
+                    }
+                    else
+                    {
+                        DataTime();
+                    }
+                }
+                else
+                {
+                    DataTime();
+                }
+
+                
 
                 //DataTime();
                 
